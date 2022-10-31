@@ -19,11 +19,14 @@ void vertex() {
 	// vertex is the tip of the grass blade
 	if (VERTEX.y > 0.0) {
 		// move in the "wind" as time progresses
-//		VERTEX -= vec3(sin(TIME) * 0.2,0,0);
+		VERTEX -= vec3(sin(TIME) * 0.2,0,0);
 		
 		// test displacement of grass tips
 		if(dist_to_player < 3.0) {
 			VERTEX -= normalize((MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz - player_pos);
+		}
+		if(INSTANCE_CUSTOM.b > 0.0) {
+			VERTEX = vec3(0.1);
 		}
 	}
 }
@@ -36,5 +39,6 @@ void vertex() {
 void fragment() {
 	float side = FRONT_FACING ? 1.0 : -1.0;
 	NORMAL = NORMAL * side;
-	ALBEDO = vec3(0,1.0,0);
+//	ALBEDO = vec3(0,1.0,0);
+	ALBEDO = COLOR.rgb;
 }

@@ -1,15 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://pxqwyppfuqdv"]
+[gd_scene load_steps=12 format=3 uid="uid://pxqwyppfuqdv"]
 
 [ext_resource type="Shader" path="res://src/Grass/Grass.gdshader" id="1_712md"]
 [ext_resource type="Script" path="res://src/Grass/Grass.gd" id="1_y627i"]
-[ext_resource type="Shader" path="res://src/Grass/grass_displacement.gdshader" id="3_3p4ye"]
 [ext_resource type="Shader" path="res://src/Grass/grass_blade.gdshader" id="3_ar1p2"]
+[ext_resource type="Shader" path="res://src/Grass/grass_displacement.gdshader" id="4_vct57"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_3b46d"]
-viewport_path = NodePath("SubViewport")
+viewport_path = NodePath("abc")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mfyuy"]
 noise_type = 0
+frequency = 1.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vyn6j"]
 seamless = true
@@ -20,8 +21,8 @@ resource_local_to_scene = true
 shader = ExtResource("1_712md")
 shader_parameter/displace = SubResource("ViewportTexture_3b46d")
 shader_parameter/rotation_noise = SubResource("NoiseTexture2D_vyn6j")
-shader_parameter/rows = 300.0
-shader_parameter/spacing = 0.079
+shader_parameter/rows = 350.0
+shader_parameter/spacing = 0.15
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hosif"]
 render_priority = 0
@@ -41,35 +42,39 @@ _surfaces = [{
 "vertex_data": PackedByteArray(83, 35, 40, 63, 0, 0, 0, 0, 0, 0, 0, 0, 255, 127, 255, 127, 255, 255, 255, 191, 160, 25, 28, 191, 0, 0, 0, 0, 0, 0, 0, 0, 255, 127, 255, 127, 255, 255, 255, 191, 84, 171, 47, 60, 181, 82, 66, 64, 0, 0, 0, 0, 255, 127, 255, 127, 255, 255, 255, 191)
 }]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_extlo"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6qdqu"]
-noise = SubResource("FastNoiseLite_extlo")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wi4g8"]
-shader = ExtResource("3_3p4ye")
-shader_parameter/noise = SubResource("NoiseTexture2D_6qdqu")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n37b3"]
+shader = ExtResource("4_vct57")
 
 [node name="Grass" type="Node3D"]
 transform = Transform3D(1, 0, -7.45058e-09, 0, 1, 0, 7.45058e-09, 0, 1, 0, 0, 0)
 script = ExtResource("1_y627i")
 
 [node name="Grass" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.934686, -3.76616)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.25952e-09, 0, -0.974356)
 amount = 100000
 visibility_aabb = AABB(-23.2431, -4, -22.1655, 46.4862, 8, 44.331)
 process_material = SubResource("ShaderMaterial_dpks1")
 draw_pass_1 = SubResource("ArrayMesh_pe4cq")
 
-[node name="Colliision" type="SubViewport" parent="."]
-size = Vector2i(420, 420)
+[node name="abc" type="SubViewport" parent="."]
+size = Vector2i(580, 561)
 render_target_update_mode = 4
 
-[node name="ColorRect" type="ColorRect" parent="Colliision"]
-material = SubResource("ShaderMaterial_wi4g8")
+[node name="ColorRect" type="ColorRect" parent="abc"]
+material = SubResource("ShaderMaterial_n37b3")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(1, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="abc"]
+visible = false
+custom_minimum_size = Vector2i(454, 1180)
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 454.0
+offset_bottom = 532.0
+grow_vertical = 2
+color = Color(0, 0, 1, 1)

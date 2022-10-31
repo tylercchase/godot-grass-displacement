@@ -12,7 +12,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _physics_process(delta):
 	if Engine.is_editor_hint():
 		RenderingServer.global_shader_parameter_set("player_pos", global_position)
-		return	
+		return
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
