@@ -23,7 +23,9 @@ void vertex() {
 		
 		// test displacement of grass tips
 		if(dist_to_player < 3.0) {
-			VERTEX -= normalize((MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz - player_pos);
+//			let's try and make it so it moves away from the player instead of the weird circle
+//			VERTEX -= normalize((MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz - player_pos);
+			
 		}
 		if(INSTANCE_CUSTOM.b > 0.0) {
 			VERTEX = vec3(0.1);
@@ -39,6 +41,5 @@ void vertex() {
 void fragment() {
 	float side = FRONT_FACING ? 1.0 : -1.0;
 	NORMAL = NORMAL * side;
-//	ALBEDO = vec3(0,1.0,0);
 	ALBEDO = COLOR.rgb;
 }

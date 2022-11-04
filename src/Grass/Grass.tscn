@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://pxqwyppfuqdv"]
+[gd_scene load_steps=13 format=3 uid="uid://pxqwyppfuqdv"]
 
 [ext_resource type="Shader" path="res://src/Grass/Grass.gdshader" id="1_712md"]
 [ext_resource type="Script" path="res://src/Grass/Grass.gd" id="1_y627i"]
+[ext_resource type="Texture2D" uid="uid://0rv6nhybyvkh" path="res://src/Grass/noise_texture.png" id="3_8mcna"]
 [ext_resource type="Shader" path="res://src/Grass/grass_blade.gdshader" id="3_ar1p2"]
 [ext_resource type="Shader" path="res://src/Grass/grass_displacement.gdshader" id="4_vct57"]
 
@@ -20,6 +21,7 @@ noise = SubResource("FastNoiseLite_mfyuy")
 resource_local_to_scene = true
 shader = ExtResource("1_712md")
 shader_parameter/displace = SubResource("ViewportTexture_3b46d")
+shader_parameter/move_noise = ExtResource("3_8mcna")
 shader_parameter/rotation_noise = SubResource("NoiseTexture2D_vyn6j")
 shader_parameter/rows = 350.0
 shader_parameter/spacing = 0.15
@@ -43,6 +45,7 @@ _surfaces = [{
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n37b3"]
+resource_local_to_scene = true
 shader = ExtResource("4_vct57")
 
 [node name="Grass" type="Node3D"]
@@ -57,24 +60,32 @@ process_material = SubResource("ShaderMaterial_dpks1")
 draw_pass_1 = SubResource("ArrayMesh_pe4cq")
 
 [node name="abc" type="SubViewport" parent="."]
-size = Vector2i(580, 561)
+size = Vector2i(513, 513)
 render_target_update_mode = 4
 
-[node name="ColorRect" type="ColorRect" parent="abc"]
-material = SubResource("ShaderMaterial_n37b3")
+[node name="Control" type="Control" parent="abc"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="abc/Control"]
+material = SubResource("ShaderMaterial_n37b3")
+layout_direction = 1
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 512.0
 color = Color(1, 0, 0, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="abc"]
+[node name="ColorRect2" type="ColorRect" parent="abc/Control"]
 visible = false
-custom_minimum_size = Vector2i(454, 1180)
+custom_minimum_size = Vector2(454, 1180)
+layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 454.0
-offset_bottom = 532.0
+offset_bottom = 1140.0
 grow_vertical = 2
 color = Color(0, 0, 1, 1)
