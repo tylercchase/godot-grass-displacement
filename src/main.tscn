@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://caipl60k6icj8"]
+[gd_scene load_steps=9 format=3 uid="uid://b0hu3hbcdvbl8"]
 
 [ext_resource type="PackedScene" uid="uid://do3ni47j8ct0l" path="res://src/Player/Player.tscn" id="1_vt41k"]
-[ext_resource type="PackedScene" uid="uid://pxqwyppfuqdv" path="res://src/Grass/Grass.tscn" id="4_0ttps"]
+[ext_resource type="PackedScene" uid="uid://b6srxfc7agcyd" path="res://src/Grass/Grass.tscn" id="2_vh1kr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sirb4"]
 albedo_color = Color(0.729412, 0.647059, 0.415686, 1)
@@ -25,10 +25,9 @@ sky = SubResource("Sky_spp8w")
 [node name="World" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_vt41k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.95304, 1, -1.47791)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.58232, 0.897616, -2.47989)
 
-[node name="Grass" parent="Player" instance=ExtResource("4_0ttps")]
-transform = Transform3D(1, 0, -7.45058e-09, 0, 1, 0, 7.45058e-09, 0, 1, -0.252863, 0, -0.310368)
+[node name="Grass" parent="Player" instance=ExtResource("2_vh1kr")]
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_u8w3i")

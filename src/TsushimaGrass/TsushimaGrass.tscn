@@ -1,10 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6srxfc7agcyd"]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="Script" path="res://src/TsushimaGrass/Grass.gd" id="1_w6ycg"]
-[ext_resource type="Shader" path="res://src/Grass/Grass.gdshader" id="2_obthx"]
-[ext_resource type="Texture2D" uid="uid://0rv6nhybyvkh" path="res://src/Grass/noise_texture.png" id="3_cfqyt"]
-[ext_resource type="Shader" path="res://src/Grass/grass_blade.gdshader" id="4_8rjwn"]
-[ext_resource type="Shader" path="res://src/Grass/grass_displacement.gdshader" id="5_037di"]
+[ext_resource type="Script" path="res://src/TsushimaGrass/Grass.gd" id="1_yuy8j"]
+[ext_resource type="Shader" path="res://src/Grass/Grass.gdshader" id="2_6k6e3"]
+[ext_resource type="Texture2D" uid="uid://0rv6nhybyvkh" path="res://src/Grass/noise_texture.png" id="3_00p1h"]
+[ext_resource type="Shader" path="res://src/Grass/grass_blade.gdshader" id="4_5ml5k"]
+[ext_resource type="Shader" path="res://src/Grass/grass_displacement.gdshader" id="5_3mtcy"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_3b46d"]
 viewport_path = NodePath("abc")
@@ -19,16 +19,16 @@ noise = SubResource("FastNoiseLite_mfyuy")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dpks1"]
 resource_local_to_scene = true
-shader = ExtResource("2_obthx")
+shader = ExtResource("2_6k6e3")
 shader_parameter/displace = SubResource("ViewportTexture_3b46d")
-shader_parameter/move_noise = ExtResource("3_cfqyt")
+shader_parameter/move_noise = ExtResource("3_00p1h")
 shader_parameter/rotation_noise = SubResource("NoiseTexture2D_vyn6j")
 shader_parameter/rows = 350.0
-shader_parameter/spacing = 0.119
+shader_parameter/spacing = 0.15
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hosif"]
 render_priority = 0
-shader = ExtResource("4_8rjwn")
+shader = ExtResource("4_5ml5k")
 shader_parameter/scale = Vector3(0.082, 0.247, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pe4cq"]
@@ -46,11 +46,11 @@ _surfaces = [{
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n37b3"]
 resource_local_to_scene = true
-shader = ExtResource("5_037di")
+shader = ExtResource("5_3mtcy")
 
-[node name="Grass" type="Node3D"]
+[node name="Tsushima Grass" type="Node3D"]
 transform = Transform3D(1, 0, -7.45058e-09, 0, 1, 0, 7.45058e-09, 0, 1, 0, 0, 0)
-script = ExtResource("1_w6ycg")
+script = ExtResource("1_yuy8j")
 
 [node name="Grass" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.25952e-09, 0, -0.974356)
@@ -74,7 +74,6 @@ grow_vertical = 2
 [node name="ColorRect" type="ColorRect" parent="abc/Control"]
 material = SubResource("ShaderMaterial_n37b3")
 layout_direction = 1
-layout_mode = 0
 offset_right = 512.0
 offset_bottom = 512.0
 color = Color(1, 0, 0, 1)
@@ -82,24 +81,9 @@ color = Color(1, 0, 0, 1)
 [node name="ColorRect2" type="ColorRect" parent="abc/Control"]
 visible = false
 custom_minimum_size = Vector2(454, 1180)
-layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 454.0
 offset_bottom = 1140.0
 grow_vertical = 2
 color = Color(0, 0, 1, 1)
-
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.460169, 0)
-remote_path = NodePath("../SubViewport/Camera3D")
-
-[node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2i(513, 513)
-render_target_update_mode = 4
-
-[node name="Camera3D" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(1, -7.45058e-09, 3.25675e-16, 0, -4.37114e-08, -1, 7.45058e-09, 1, -4.37114e-08, 0, -0.460169, 0)
-cull_mask = 524288
-projection = 1
-size = 23.6815
