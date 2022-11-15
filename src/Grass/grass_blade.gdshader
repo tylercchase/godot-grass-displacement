@@ -23,6 +23,8 @@ void vertex() {
 		
 	}
 	VERTEX.y *= 1.0 - INSTANCE_CUSTOM.b;
+	VERTEX.x -= (INSTANCE_CUSTOM.r * 2.0 - 1.0) * VERTEX.y;
+	VERTEX.z -= (INSTANCE_CUSTOM.g * 2.0 - 1.0) * VERTEX.y;
 }
 
 
@@ -33,5 +35,8 @@ void vertex() {
 void fragment() {
 	float side = FRONT_FACING ? 1.0 : -1.0;
 	NORMAL = NORMAL * side;
-	ALBEDO = COLOR.rgb;
+	ALBEDO = vec3(0.2,0.6,0.2);
+
+	// show displacement
+//	ALBEDO = COLOR.rgb;
 }

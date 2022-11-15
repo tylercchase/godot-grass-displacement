@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b6srxfc7agcyd" path="res://src/Grass/Grass.tscn" id="2_vh1kr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sirb4"]
-albedo_color = Color(0.729412, 0.647059, 0.415686, 1)
+albedo_color = Color(0.635294, 0.690196, 0.364706, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_u8w3i"]
 material = SubResource("StandardMaterial3D_sirb4")
@@ -25,7 +25,7 @@ sky = SubResource("Sky_spp8w")
 [node name="World" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_vt41k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.58232, 0.897616, -2.47989)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.16449, 0.997285, -5.55113)
 
 [node name="Grass" parent="Player" instance=ExtResource("2_vh1kr")]
 
