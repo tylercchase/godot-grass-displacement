@@ -15,14 +15,13 @@ void fragment() {
 	
 	// should pull from other parts of the canvas
 
-	COLOR = vec4(0.5,0.5,0.5,1.0);
-	vec4 color = vec4(0,0,0,0);
+	vec4 color = vec4(0.5,0.5,0,1.0);
 	if (player_pos.y > 1.5) {
 		
 	} else {
 		if (d < r) {
 		// this is underneath the player, with a flattening mask via blue
-		COLOR = vec4(0,0.0,1.0,1.0);
+		color.b = 1.0;
 	} else {
 		if(d < 0.05) {
 			// get angle
@@ -32,7 +31,9 @@ void fragment() {
 				// I know how far from the center I am, and probably have some stuff to deal with things
 				
 				// _should_ be able to just pipe in UV?
-				COLOR = vec4((uv.x * 10.0 + 1.0) / 2.0 , (uv.y * 10.0 + 1.0) / 2.0 ,0.0,1.0);
+				color.r = (uv.x * 10.0 + 1.0) / 2.0;
+				color.g = (uv.y * 10.0 + 1.0) / 2.0;
+//				color = vec4(,  ,0.0,1.0);
 				
 			} else {
 				// everything else
@@ -41,10 +42,10 @@ void fragment() {
 	}
 	
 	if((player_last_pos - player_pos).x == 0.0 ) {
-		COLOR = vec4(1.0,1.0,0.0,1.0);
+//		COLOR = vec4(1.0,1.0,0.0,1.0);
 	}
 	
-	
+	COLOR = color;
 	
 	player_last_pos = player_pos;
 //	COLOR = vec4(UV.x); //vec4(vec3( 1.0 - length(UV)), 1.0);
