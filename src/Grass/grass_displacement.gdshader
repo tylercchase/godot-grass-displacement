@@ -3,6 +3,7 @@ shader_type canvas_item;
 global uniform vec3 player_pos;
 varying vec3 player_last_pos;
 
+uniform sampler2D self_reference;
 
 
 void fragment() {
@@ -14,36 +15,28 @@ void fragment() {
 	vec4 c = vec4(0);
 	
 	// should pull from other parts of the canvas
-
-	vec4 color = vec4(0.5,0.5,0,1.0);
-	if (player_pos.y > 1.5) {
-		
-	} else {
-		if (d < r) {
-		// this is underneath the player, with a flattening mask via blue
-		color.b = 1.0;
-	} else {
+	vec4 color = vec4(0.5,0.5,0.0,1.0);
+	// should pull from previous color that was there;
+//	color = texture(self_reference, SCREEN_UV);
+//	if (player_pos.y <= 2.0) {
+		// player is on floor so keep writing to the texturee
+		color.b += clamp(1.0 - d * 20.0 * player_pos.y,0,1.0);
 		if(d < 0.05) {
 			// get angle
-				float angle = atan(UV.y/UV.x);
-				
-				// the stuff close by that should get rotated, this is the big stuff
-				// I know how far from the center I am, and probably have some stuff to deal with things
-				
-				// _should_ be able to just pipe in UV?
-				color.r = (uv.x * 10.0 + 1.0) / 2.0;
-				color.g = (uv.y * 10.0 + 1.0) / 2.0;
-//				color = vec4(,  ,0.0,1.0);
-				
-			} else {
-				// everything else
-			}
+			float angle = atan(UV.y/UV.x);
+			
+			// the stuff close by that should get rotated, this is the big stuff
+			// I know how far from the center I am, and probably have some stuff to deal with things
+			
+			// _should_ be able to just pipe in UV?
+			color.r = (uv.x * 30.0 + 1.0) / 2.0;
+			color.g = (uv.y * 30.0 + 1.0) / 2.0;
+		//				color = vec4(,  ,0.0,1.0);
 		}
-	}
+//	}
 	
-	if((player_last_pos - player_pos).x == 0.0 ) {
-//		COLOR = vec4(1.0,1.0,0.0,1.0);
-	}
+	
+
 	
 	COLOR = color;
 	

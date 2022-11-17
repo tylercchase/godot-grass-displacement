@@ -15,13 +15,9 @@ void vertex() {
 
 	// move in the "wind" as time progresses
 	VERTEX += vec3(sin(TIME * INSTANCE_CUSTOM.w) * 0.2 
-	,0,0) * VERTEX.y; // vertex.y should make it so later we can 
+	,0,0) * VERTEX.y;
 	
-	// test displacement of grass tips
-	if(dist_to_player < 3.0) {
-//			VERTEX -= normalize((MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz - player_pos);
-		
-	}
+	// apply stuff from texture
 	VERTEX.y *= 1.0 - INSTANCE_CUSTOM.b;
 	VERTEX.x -= (INSTANCE_CUSTOM.r * 2.0 - 1.0) * VERTEX.y;
 	VERTEX.z -= (INSTANCE_CUSTOM.g * 2.0 - 1.0) * VERTEX.y;
@@ -36,7 +32,7 @@ void fragment() {
 	float side = FRONT_FACING ? 1.0 : -1.0;
 	NORMAL = NORMAL * side;
 	ALBEDO = vec3(0.2,0.6,0.2);
-
-	// show displacement
-//	ALBEDO = COLOR.rgb;
+	
+	// show texture
+	ALBEDO = COLOR.rgb;
 }

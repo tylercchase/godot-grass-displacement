@@ -39,11 +39,20 @@ void process() {
 	pos.x += EMISSION_TRANSFORM[3][0] - mod(EMISSION_TRANSFORM[3][0], spacing);
 	pos.z += EMISSION_TRANSFORM[3][2] - mod(EMISSION_TRANSFORM[3][2], spacing);
 	
-		vec2 diffa = (player_pos - pos).xz;
+	// would be cool to pull texture from displacement from the posititon relative to the player
+	vec2 diffa = (player_pos - pos).xz;
 
-	float dist_to_player = distance(player_pos, pos); 
-	vec4 displacement = texture(displace,// diffa * 0.01
-	displace_uv
+
+	// Magic number so far, needs to be more defien
+	diffa *= 0.03;
+	// Move to the center of the texture
+	diffa -= vec2(0.5,0.5);
+//	diffa.x -= 0.03;
+//	diffa.y -= 0.05;
+//	float dist_to_player = distance(player_pos, pos); 
+	vec4 displacement = texture(displace,
+	 diffa 
+//	displace_uv
 	);// );
 	vec3 noise = texture(move_noise, pos.xz * 0.001).rgb;
 	float wind = texture(rotation_noise, pos.xz * 0.1).b;

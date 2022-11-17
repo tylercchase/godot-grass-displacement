@@ -24,10 +24,11 @@ sky = SubResource("Sky_spp8w")
 
 [node name="World" type="Node3D"]
 
-[node name="Player" parent="." instance=ExtResource("1_vt41k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.33412, 1.20082, -5.80806)
+[node name="Grass" parent="." instance=ExtResource("2_vh1kr")]
+transform = Transform3D(1, 0, -7.45058e-09, 0, 1, 0, 7.45058e-09, 0, 1, -6.15583, 0.761786, -6.75413)
 
-[node name="Grass" parent="Player" instance=ExtResource("2_vh1kr")]
+[node name="Player" parent="." instance=ExtResource("1_vt41k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.67288, 0.761786, -8.64098)
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_u8w3i")
