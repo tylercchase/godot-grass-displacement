@@ -4,8 +4,8 @@ uniform float spacing = 1.0;
 
 uniform sampler2D rotation_noise;
 
-uniform sampler2D displace;
 global uniform vec3 player_pos;
+uniform sampler2D displace;
 uniform sampler2D move_noise;
 void start() {
 	// Place start code here.
@@ -47,14 +47,15 @@ void process() {
 	diffa *= 0.03;
 	// Move to the center of the texture
 	diffa -= vec2(0.5,0.5);
-//	diffa.x -= 0.03;
-//	diffa.y -= 0.05;
-//	float dist_to_player = distance(player_pos, pos); 
-	vec4 displacement = texture(displace,
+	vec4 displacement;
+	if(diffa.x > 1.0 || diffa.y > 1.0) {
+		displacement = vec4(0.5,0.5,0,1.0);
+	} else {
+	 displacement = texture(displace,
 	 diffa 
-//	displace_uv
-	);// );
-	vec3 noise = texture(move_noise, pos.xz * 0.001).rgb;
+	);
+	}
+	vec3 noise = texture(move_noise, pos.xz * 0.1).rgb;
 	float wind = texture(rotation_noise, pos.xz * 0.1).b;
 
 	// add some spice to the positions of the grass

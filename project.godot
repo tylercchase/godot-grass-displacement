@@ -15,6 +15,10 @@ run/main_scene="res://src/main.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+DisplacementBuffer="*res://src/Singletons/DisplacementBuffer.gd"
+
 [input]
 
 left={
@@ -45,14 +49,6 @@ jump={
 
 [shader_globals]
 
-displacement_map={
-"type": "sampler2D",
-"value": ""
-}
-displace={
-"type": "sampler2D",
-"value": ""
-}
 player_pos={
 "type": "vec3",
 "value": Vector3(0, 0, 0)

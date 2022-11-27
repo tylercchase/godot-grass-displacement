@@ -31,5 +31,19 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
-	move_and_slide()
+	var _a = move_and_slide()
 	RenderingServer.global_shader_parameter_set("player_pos", global_position)
+
+
+
+
+
+
+func _on_object_area_body_entered(body):
+	print('aaaaaaaa')
+	DisplacementBuffer.add_object(body)
+	pass # Replace with function body.
+
+
+func _on_object_area_body_exited(body):
+	DisplacementBuffer.remove_object(body)

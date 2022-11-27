@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0hu3hbcdvbl8"]
+[gd_scene load_steps=11 format=3 uid="uid://b0hu3hbcdvbl8"]
 
 [ext_resource type="PackedScene" uid="uid://do3ni47j8ct0l" path="res://src/Player/Player.tscn" id="1_vt41k"]
 [ext_resource type="PackedScene" uid="uid://b6srxfc7agcyd" path="res://src/Grass/Grass.tscn" id="2_vh1kr"]
@@ -22,13 +22,14 @@ sky_material = SubResource("ProceduralSkyMaterial_8i2bu")
 background_mode = 2
 sky = SubResource("Sky_spp8w")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_usg0c"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_oc2ip"]
+
 [node name="World" type="Node3D"]
 
-[node name="Grass" parent="." instance=ExtResource("2_vh1kr")]
-transform = Transform3D(1, 0, -7.45058e-09, 0, 1, 0, 7.45058e-09, 0, 1, -6.15583, 0.761786, -6.75413)
-
 [node name="Player" parent="." instance=ExtResource("1_vt41k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.67288, 0.761786, -8.64098)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.30946, 2.4052, 9.21025)
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_u8w3i")
@@ -44,3 +45,16 @@ environment = SubResource("Environment_1m5t7")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.937319, 0.348474, 0, -0.348474, 0.937319, 0, -1.72388, 0)
 shadow_enabled = true
+
+[node name="Grass" parent="." instance=ExtResource("2_vh1kr")]
+transform = Transform3D(1, 0, -7.45058e-09, 0, 1, 0, 7.45058e-09, 0, 1, 0, 0, -3.57526)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94122, -2.33076)
+collision_layer = 2147483649
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_usg0c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("SphereMesh_oc2ip")

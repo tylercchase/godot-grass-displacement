@@ -7,25 +7,25 @@
 [ext_resource type="Script" path="res://src/Grass/viewport.gd" id="5_3asbu"]
 [ext_resource type="Shader" path="res://src/Grass/grass_displacement.gdshader" id="5_037di"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_3b46d"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_7q7hj"]
 viewport_path = NodePath("abc")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_mfyuy"]
-noise_type = 0
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_o1o6l"]
 frequency = 1.0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vyn6j"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o2ebo"]
+resource_local_to_scene = true
 seamless = true
-noise = SubResource("FastNoiseLite_mfyuy")
+noise = SubResource("FastNoiseLite_o1o6l")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dpks1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fyy4p"]
 resource_local_to_scene = true
 shader = ExtResource("2_obthx")
-shader_parameter/displace = SubResource("ViewportTexture_3b46d")
+shader_parameter/displace = SubResource("ViewportTexture_7q7hj")
 shader_parameter/move_noise = ExtResource("3_cfqyt")
-shader_parameter/rotation_noise = SubResource("NoiseTexture2D_vyn6j")
-shader_parameter/rows = 350.0
-shader_parameter/spacing = 0.119
+shader_parameter/rotation_noise = SubResource("NoiseTexture2D_o2ebo")
+shader_parameter/rows = 300.0
+shader_parameter/spacing = 0.081
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hosif"]
 render_priority = 0
@@ -57,11 +57,11 @@ script = ExtResource("1_w6ycg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.25952e-09, 0, -0.974356)
 amount = 100000
 visibility_aabb = AABB(-23.2431, -4, -22.1655, 46.4862, 8, 44.331)
-process_material = SubResource("ShaderMaterial_dpks1")
+process_material = SubResource("ShaderMaterial_fyy4p")
 draw_pass_1 = SubResource("ArrayMesh_pe4cq")
 
 [node name="abc" type="SubViewport" parent="."]
-size = Vector2i(513, 513)
+size = Vector2i(1024, 1024)
 render_target_update_mode = 4
 script = ExtResource("5_3asbu")
 
@@ -77,8 +77,8 @@ grow_vertical = 2
 material = SubResource("ShaderMaterial_n37b3")
 layout_direction = 1
 layout_mode = 0
-offset_right = 512.0
-offset_bottom = 512.0
+offset_right = 1024.0
+offset_bottom = 1024.0
 color = Color(1, 0, 0, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="abc/Control"]

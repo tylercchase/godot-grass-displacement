@@ -14,17 +14,14 @@ void vertex() {
 	dist_to_player = distance(player_pos, (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz); 
 
 	// move in the "wind" as time progresses
-	VERTEX += vec3(sin(TIME * INSTANCE_CUSTOM.w) * 0.2 
-	,0,0) * VERTEX.y;
+//	VERTEX += vec3(sin(TIME * INSTANCE_CUSTOM.w) * 0.2 
+//	,0,0) * VERTEX.y;
 	
 	// apply stuff from texture
 	VERTEX.y *= 1.0 - INSTANCE_CUSTOM.b;
-	VERTEX.x -= (INSTANCE_CUSTOM.r * 2.0 - 1.0) * VERTEX.y;
-	VERTEX.z -= (INSTANCE_CUSTOM.g * 2.0 - 1.0) * VERTEX.y;
+	VERTEX.x += (INSTANCE_CUSTOM.r * 2.0 - 1.0) * VERTEX.y * 1.0;
+	VERTEX.z += (INSTANCE_CUSTOM.g * 2.0 - 1.0) * VERTEX.y * 1.0;
 }
-
-
-
 
 
 
