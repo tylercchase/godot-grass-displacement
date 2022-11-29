@@ -2,7 +2,6 @@
 
 shader_type spatial;
 render_mode cull_disabled;
-
 uniform vec3 scale = vec3(1.0);
 
 global uniform vec3 player_pos;
@@ -31,5 +30,5 @@ void fragment() {
 	ALBEDO = vec3(0.2,0.6,0.2);
 	
 	// show texture
-	ALBEDO = COLOR.rgb;
+//	ALBEDO = COLOR.rgb;
 }

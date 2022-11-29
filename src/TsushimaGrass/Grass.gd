@@ -1,3 +1,4 @@
+@tool
 extends Node3D
 
 
@@ -7,3 +8,7 @@ func _ready():
 	var coll = $abc.get_texture()
 
 	grass.process_material.set_shader_parameter('displace', coll)
+func _process(_delta):
+#	grass.process_material.set_shader_parameter('displace', coll)
+	pass
+	

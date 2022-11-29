@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://do3ni47j8ct0l"]
+[gd_scene load_steps=8 format=3 uid="uid://do3ni47j8ct0l"]
 
 [ext_resource type="Script" path="res://src/Player/Player.gd" id="1_bowm3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_w8icd"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1dani"]
+albedo_color = Color(0.913725, 0.227451, 0, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_4aukp"]
+material = SubResource("StandardMaterial3D_1dani")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2sanu"]
 albedo_color = Color(0.996078, 0, 0.129412, 1)
@@ -14,11 +18,6 @@ material = SubResource("StandardMaterial3D_2sanu")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_43b2p"]
 size = Vector3(28.3214, 1.69208, 16.3575)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3l54j"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_tlx5x"]
-material = SubResource("StandardMaterial3D_3l54j")
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_bowm3")
@@ -45,9 +44,6 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ObjectArea"]
 shape = SubResource("BoxShape3D_43b2p")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ObjectArea"]
-mesh = SubResource("BoxMesh_tlx5x")
 
 [connection signal="area_entered" from="ObjectArea" to="." method="_on_object_area_area_entered"]
 [connection signal="area_entered" from="ObjectArea" to="." method="_on_area_3d_area_entered"]

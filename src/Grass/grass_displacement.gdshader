@@ -19,8 +19,8 @@ void fragment() {
 	// should pull from previous color that was there;
 //	color = texture(self_reference, SCREEN_UV);
 
-	if(d < 0.05 /*replace with dynamic radius?*/) {
-		color.b += clamp(1.0 - d * 40.0 * player_pos.y,0.0,1.0);
+	if(d < 0.02 /*replace with dynamic radius?*/) {
+		color.b += clamp(1.0 - (d + 0.01) * 40.0 * player_pos.y,0.0,1.0);
 		// get angle
 		float angle = atan(UV.y/UV.x);
 		
@@ -30,8 +30,8 @@ void fragment() {
 		// _should_ be able to just pipe in UV?
 		
 		// angle's not quite right, grass blade or texture side?
-		color.r = (uv.x * 30.0 + 1.0) / 2.0;
-		color.g = (uv.y * 30.0 + 1.0) / 2.0;
+		color.r = (uv.x * 30.0 + 1.0) / 2.0 ;
+		color.g = (uv.y * 30.0 + 1.0) / 2.0 ;
 	}
 	
 	

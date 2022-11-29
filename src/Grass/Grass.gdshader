@@ -44,28 +44,29 @@ void process() {
 
 
 	// Magic number so far, needs to be more defien
-	diffa *= 0.03;
+	diffa *= 0.02;
 	// Move to the center of the texture
-	diffa -= vec2(0.5,0.5);
+	diffa += vec2(0.5,0.5);
 	vec4 displacement;
-	if(diffa.x > 1.0 || diffa.y > 1.0) {
+	if(diffa.x > 1.0 || diffa.y > 1.0 || diffa.x < 0.0 || diffa.y < 0.0) {
 		displacement = vec4(0.5,0.5,0,1.0);
+//		COLOR = vec4(1.0,0,0,1.0);
+		
 	} else {
-	 displacement = texture(displace,
-	 diffa 
-	);
+//		COLOR = vec4(0,1.0,0,1.0);
+		 displacement = texture(displace,
+		 diffa 
+		);
 	}
-	vec3 noise = texture(move_noise, pos.xz * 0.1).rgb;
-	float wind = texture(rotation_noise, pos.xz * 0.1).b;
+	vec3 noise = texture(move_noise, pos.xz).rgb;
+	float wind = texture(rotation_noise, pos.xz).b;
 
 	// add some spice to the positions of the grass
 	pos.x += noise.x * spacing;
 	pos.z += noise.y * spacing;
 	
 	
-	
-	
-	COLOR = vec4(displacement.rgb, 1.0);
+//	COLOR = vec4(displacement.rgb, 1.0);
 	// rotate blades randomly, for some reason not working on play?
 	TRANSFORM[0][0] = cos(noise.x * 3.0);
 	TRANSFORM[0][2] = -sin(noise.x * 3.0);
