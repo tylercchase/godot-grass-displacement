@@ -2,7 +2,11 @@ shader_type particles;
 uniform float rows = 4;
 uniform float spacing = 1.0;
 
-uniform sampler2D rotation_noise;
+uniform float wind_speed = 1.0;
+
+
+
+uniform sampler2D wind_noise;
 
 global uniform vec3 player_pos;
 uniform sampler2D displace;
@@ -59,7 +63,7 @@ void process() {
 		);
 	}
 	vec3 noise = texture(move_noise, pos.xz).rgb;
-	float wind = texture(rotation_noise, pos.xz).b;
+	float wind = texture(wind_noise, pos.xz ).b * wind_speed ;
 
 	// add some spice to the positions of the grass
 	pos.x += noise.x * spacing;

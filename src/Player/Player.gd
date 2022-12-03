@@ -7,7 +7,8 @@ const JUMP_VELOCITY = 4.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
+func _ready():
+	DisplacementBuffer.add_player(self)
 
 func _physics_process(delta):
 	if Engine.is_editor_hint():
@@ -41,7 +42,7 @@ func _physics_process(delta):
 
 func _on_object_area_body_entered(body):
 	print('aaaaaaaa')
-	DisplacementBuffer.add_object(body)
+	DisplacementBuffer.add_object(body, 1)
 	pass # Replace with function body.
 
 

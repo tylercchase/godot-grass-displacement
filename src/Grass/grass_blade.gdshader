@@ -13,8 +13,8 @@ void vertex() {
 	dist_to_player = distance(player_pos, (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz); 
 
 	// move in the "wind" as time progresses
-//	VERTEX += vec3(sin(TIME * INSTANCE_CUSTOM.w) * 0.2 
-//	,0,0) * VERTEX.y;
+	VERTEX += vec3(sin(TIME * INSTANCE_CUSTOM.w) * 0.2 
+	,0,0) * VERTEX.y;
 	
 	// apply stuff from texture
 	VERTEX.y *= 1.0 - INSTANCE_CUSTOM.b;
@@ -28,7 +28,7 @@ void fragment() {
 	float side = FRONT_FACING ? 1.0 : -1.0;
 	NORMAL = NORMAL * side;
 	ALBEDO = vec3(0.2,0.6,0.2);
-	
+	ROUGHNESS = 1.0;
 	// show texture
 //	ALBEDO = COLOR.rgb;
 }
