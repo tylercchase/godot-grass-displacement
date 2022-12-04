@@ -53,7 +53,3 @@ player_pos={
 "type": "vec3",
 "value": Vector3(0, 0, 0)
 }
-test={
-"type": "sampler2D",
-"value": ""
-}

@@ -17,7 +17,7 @@ albedo_color = Color(0.996078, 0, 0.129412, 1)
 material = SubResource("StandardMaterial3D_2sanu")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_43b2p"]
-size = Vector3(28.3214, 1.69208, 16.3575)
+size = Vector3(20, 5, 20)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_bowm3")
@@ -40,13 +40,9 @@ mesh = SubResource("SphereMesh_fdeh5")
 [node name="ObjectArea" type="Area3D" parent="."]
 collision_layer = 2147483648
 collision_mask = 2147483648
-monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ObjectArea"]
 shape = SubResource("BoxShape3D_43b2p")
 
-[connection signal="area_entered" from="ObjectArea" to="." method="_on_object_area_area_entered"]
-[connection signal="area_entered" from="ObjectArea" to="." method="_on_area_3d_area_entered"]
-[connection signal="area_exited" from="ObjectArea" to="." method="_on_object_area_area_exited"]
 [connection signal="body_entered" from="ObjectArea" to="." method="_on_object_area_body_entered"]
 [connection signal="body_exited" from="ObjectArea" to="." method="_on_object_area_body_exited"]

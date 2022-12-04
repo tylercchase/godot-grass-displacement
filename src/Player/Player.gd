@@ -43,7 +43,6 @@ func _physics_process(delta):
 func _on_object_area_body_entered(body):
 	print('aaaaaaaa')
 	DisplacementBuffer.add_object(body, 1)
-	pass # Replace with function body.
 
 
 func _on_object_area_body_exited(body):

@@ -16,36 +16,30 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	var should_change = false
 	
 	var things = []
 	for object in objects.keys():
 		# keeps a reference to the node so we're able to constantly poll for positions
-		print(objects[object].ref.global_position)
 		var relative = player.global_position - objects[object].ref.global_position
-		things.push_back({"x": relative.y, "y": relative.y, "r": 3})
+		things.push_back({"x": relative.x, "y": relative.z, "r": 3})
 	# do cool stuff to make a texture that moves and adds these objects to the game?
-	if should_change:
-		print('a')
-		# maybe store old texture and then make a new one pulling from coordinates above?
-		texture.fill(Color(0.5, 0.5, 0.0, 1.0))
-		for thing in things:
-			print(thing)
-			draw_circle(thing.x,thing.y,thing.r)
-	draw_circle(0,0,20) # player draw constant for now
+	for thing in things:
+#		print(thing.x,thing.y,thing.r)
+		draw_circle(thing.x * 30,thing.y * 30,25)
+	draw_circle(0,0,20) # player draw constant for now, should probably check if player is on ground
+	# should really move the canvas while doing this
+	
 	# go through every pixel and conver it to -1 to 1 and then bring towards 0
 	
 func draw_circle(_x,_y,radius):
 	# center of screen should be 0,0
-	var center = 512
 	var point = Vector2(512 + _x, 512 + _y)
-	for x in range(point.x - radius, point.x + radius):
-		for y in range(point.y - radius, point.y + radius):
-			if Vector2(x,y).distance_to(point):
+	for x in range(clamp(point.x - radius,0,1024), clamp(point.x + radius, 0,1024)):
+		for y in range(clamp(point.y - radius,0,1024), clamp(point.y + radius,0,1024)):
+			if Vector2(x,y).distance_to(point) <= radius:
 				texture.set_pixel(x,y,Color.BLUE)
-			pass
-#	print('drawing circle', x,y,radius)
 func add_player(object: Node):
 	player = object
 func add_object(object: Node, r):
