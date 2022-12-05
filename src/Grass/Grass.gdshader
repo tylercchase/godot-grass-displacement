@@ -63,7 +63,7 @@ void process() {
 		);
 	}
 	vec3 noise = texture(move_noise, pos.xz).rgb;
-	float wind = texture(wind_noise, pos.xz ).b * wind_speed ;
+	float wind = texture(wind_noise, pos.xz).b * wind_speed ;
 
 	// add some spice to the positions of the grass
 	pos.x += noise.x * spacing;

@@ -1,5 +1,3 @@
-// NOTE: Shader automatically converted from Godot Engine 4.0.beta3's StandardMaterial3D.
-
 shader_type spatial;
 render_mode cull_disabled;
 uniform vec3 scale = vec3(1.0);
@@ -13,7 +11,7 @@ void vertex() {
 	dist_to_player = distance(player_pos, (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz); 
 
 	// move in the "wind" as time progresses
-	VERTEX += vec3(sin(TIME * INSTANCE_CUSTOM.w) * 0.2 
+	VERTEX += vec3(sin(TIME * INSTANCE_CUSTOM.w) * 0.5
 	,0,0) * VERTEX.y;
 	
 	// apply stuff from texture
@@ -29,6 +27,4 @@ void fragment() {
 	NORMAL = NORMAL * side;
 	ALBEDO = vec3(0.2,0.6,0.2);
 	ROUGHNESS = 1.0;
-	// show texture
-//	ALBEDO = COLOR.rgb;
 }
