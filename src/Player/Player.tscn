@@ -17,7 +17,7 @@ albedo_color = Color(0.996078, 0, 0.129412, 1)
 material = SubResource("StandardMaterial3D_2sanu")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_43b2p"]
-size = Vector3(20, 5, 20)
+size = Vector3(40, 5, 40)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_bowm3")
