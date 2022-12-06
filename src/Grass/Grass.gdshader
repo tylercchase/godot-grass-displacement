@@ -71,11 +71,10 @@ void process() {
 	
 	
 //	COLOR = vec4(displacement.rgb, 1.0);
-	// rotate blades randomly, for some reason not working on play?
-//	TRANSFORM[0][0] = cos(noise.x * 3.0);
-//	TRANSFORM[0][2] = -sin(noise.x * 3.0);
-//	TRANSFORM[2][0] = sin(noise.y * 3.0);
-//	TRANSFORM[2][2] = cos(noise.y * 3.0);
+//		TRANSFORM[0][0] = cos(noise.x * 3.0);
+//		TRANSFORM[0][2] = -sin(noise.x * 3.0);
+//		TRANSFORM[2][0] = sin(noise.y * 3.0);
+//		TRANSFORM[2][2] = cos(noise.y * 3.0);
 	
 	TRANSFORM[3][0] = pos.x;
 	TRANSFORM[3][1] = pos.y;

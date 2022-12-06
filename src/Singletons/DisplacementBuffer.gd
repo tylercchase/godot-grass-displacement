@@ -13,6 +13,9 @@ var size = 1024
 var total_difference = Vector2()
 var timer = Timer.new()
 var player_last_pos = Vector2()
+
+var trail := []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	texture = Image.create(size, size, false, Image.FORMAT_RGBA8)
@@ -34,20 +37,21 @@ func _process(_delta):
 		things.push_back({"x": relative.x, "y": relative.z, "r": objects[object].r * 20})
 	# do cool stuff to make a texture that moves and adds these objects to the game?
 	
+	# could probably just keep track of where a player has been and mark trails...
+	
 	# move the texture based off of how far the player has moved
 	var difference = player_last_pos - Vector2(player.global_position.x,player.global_position.z)
 	if difference != Vector2(0,0):
-		player_last_pos = Vector2(player.global_position.x,player.global_position.z)
 		total_difference += difference
 		if !timer.is_stopped() && abs(total_difference.x) >= 1.0 || abs(total_difference.y) >= 1.0:
-			# shift all the pixel now by however much
-			# if it goes outside the bounds then just insert 0
-			# this is ridiculously expensive...
-			# compute shader???
-			for x in range(0,size):
-				for y in range(0,size):
-					var shifted_coordinates = 1 #Vector2(x + total_difference.x, y + total_difference.y)
-			total_difference = Vector2.ZERO
+			if trail.size() > 20:
+				trail.pop_front()
+			trail.push_back([player_last_pos, 1.0])
+			player_last_pos = Vector2(player.global_position.x,player.global_position.z)
+	for piece in trail:
+		print(piece)
+		var piece_difference = piece[0] - Vector2(player.global_position.x,player.global_position.z)
+		draw_circle(-piece_difference.x * 20,-piece_difference.y * 20, 15)
 	# eventually shift all of the pixel
 	
 	# draw circles, will overwrite any shifts on constant objects
@@ -59,7 +63,7 @@ func _process(_delta):
 	
 	timer.start()
 	
-func draw_circle(_x,_y,radius):
+func draw_circle(_x,_y,radius, scale=1.0):
 	# center of screen should be 0,0
 	var point = Vector2(512 + _x, 512 + _y)
 	for x in range(clamp(point.x - radius,0,1024), clamp(point.x + radius, 0,1024)):
@@ -85,11 +89,9 @@ func add_player(object: Node):
 func add_object(object: Node, r):
 	# keeps a reference to the node so we're able to constantly poll for positions
 	objects[object.get_instance_id()] = { "ref": object, "r": r}
-	print(objects)
 
 func remove_object(object: Node):
 	objects.erase(object.get_instance_id())
-	print(objects)
 
 func get_texture() -> ImageTexture:
 	return ImageTexture.create_from_image(texture)
