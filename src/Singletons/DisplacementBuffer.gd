@@ -21,7 +21,7 @@ func _ready():
 	texture = Image.create(size, size, false, Image.FORMAT_RGBA8)
 	texture.fill(Color(0.5, 0.5, 0.0, 1.0))
 	timer.one_shot = true
-	timer.wait_time = 0.5
+	timer.wait_time = 1
 	add_child(timer)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -43,15 +43,20 @@ func _process(_delta):
 	var difference = player_last_pos - Vector2(player.global_position.x,player.global_position.z)
 	if difference != Vector2(0,0):
 		total_difference += difference
-		if !timer.is_stopped() && abs(total_difference.x) >= 1.0 || abs(total_difference.y) >= 1.0:
+		if timer.is_stopped() && abs(total_difference.x) >= 1.0 || abs(total_difference.y) >= 1.0:
 			if trail.size() > 20:
 				trail.pop_front()
 			trail.push_back([player_last_pos, 1.0])
 			player_last_pos = Vector2(player.global_position.x,player.global_position.z)
-	for piece in trail:
-		print(piece)
-		var piece_difference = piece[0] - Vector2(player.global_position.x,player.global_position.z)
-		draw_circle(-piece_difference.x * 20,-piece_difference.y * 20, 15)
+	var i = 0
+	while i < trail.size():
+		var piece_difference = trail[i][0] - Vector2(player.global_position.x,player.global_position.z)
+		trail[i][1] -= 0.05
+		draw_circle(-piece_difference.x * 20,-piece_difference.y * 20, 15, trail[i][1])
+		if trail[i][1] <= 0:
+			trail.remove_at(i)
+			i -= 1
+		i += 1
 	# eventually shift all of the pixel
 	
 	# draw circles, will overwrite any shifts on constant objects
@@ -76,10 +81,10 @@ func draw_circle(_x,_y,radius, scale=1.0):
 				var x_rotation = 0.0
 				var z_rotation = 0.0
 		
-				x_rotation = (x - point.x  + 1.0) / 2.0 
-				z_rotation = (y - point.y + 1.0) / 2.0 
+				x_rotation = ((x - point.x) * scale  + 1.0) / 2.0 
+				z_rotation = ((y - point.y) * scale + 1.0) / 2.0 
 				
-				flattening = 1.0 - distance / radius
+				flattening = 1.0 * scale - (distance / radius) 
 				texture.set_pixel(x,y,Color(x_rotation, z_rotation, flattening))
 				
 
