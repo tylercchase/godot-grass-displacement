@@ -13,6 +13,7 @@ uniform sampler2D displace;
 uniform sampler2D move_noise;
 
 void process() {
+	// a lot of the placement code comes from the "Godot Grass shader tutorial" video
 	vec3 pos = vec3(0.0, 0.0, 0.0);
 	pos.z = float(INDEX);
 	pos.x = mod(pos.z, rows);
