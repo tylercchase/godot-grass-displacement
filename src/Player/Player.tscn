@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://do3ni47j8ct0l"]
+[gd_scene load_steps=6 format=3 uid="uid://do3ni47j8ct0l"]
 
 [ext_resource type="Script" path="res://src/Player/Player.gd" id="1_bowm3"]
 
@@ -9,12 +9,6 @@ albedo_color = Color(0.913725, 0.227451, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_4aukp"]
 material = SubResource("StandardMaterial3D_1dani")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2sanu"]
-albedo_color = Color(0.996078, 0, 0.129412, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_fdeh5"]
-material = SubResource("StandardMaterial3D_2sanu")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_43b2p"]
 size = Vector3(40, 5, 40)
@@ -30,12 +24,6 @@ mesh = SubResource("SphereMesh_4aukp")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.793789, 0.608193, 0, -0.608193, 0.793789, 0, 2.84273, 2.64373)
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0111628, 0)
-visible = false
-layers = 524288
-mesh = SubResource("SphereMesh_fdeh5")
 
 [node name="ObjectArea" type="Area3D" parent="."]
 collision_layer = 2147483648
